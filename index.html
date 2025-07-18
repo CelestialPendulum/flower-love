@@ -2,158 +2,90 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Floral Love</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flower Love</title>
   <style>
     body {
+      font-family: Arial, sans-serif;
+      background-color: #fff0f5;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to top, #fff7fb, #f2e9f7);
-      overflow-x: hidden;
-      color: #4b2354;
-    }
-
-    header {
       text-align: center;
-      padding: 2rem;
     }
 
     h1 {
-      font-size: 3rem;
-      color: #a44fa4;
-      animation: fadeIn 2s ease-in-out;
+      color: #c71585;
+      margin-top: 30px;
     }
 
     .flowers {
       display: flex;
-      justify-content: center;
       flex-wrap: wrap;
-      gap: 2rem;
-      margin: 2rem;
+      justify-content: center;
+      padding: 20px;
+      gap: 20px;
     }
 
     .flower {
-      width: 200px;
-      height: 200px;
-      background-color: #fff0fc;
-      border-radius: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      background-color: #fff;
+      border-radius: 15px;
+      padding: 15px;
+      width: 250px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .flower:hover {
-      transform: scale(1.1) rotate(1deg);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
 
     .flower img {
-      width: 80px;
-      height: 80px;
-      object-fit: contain;
-      margin-bottom: 1rem;
-    }
-
-    .questions {
-      max-width: 600px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background: #ffe6f7;
-      border-radius: 16px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      animation: fadeInUp 2s ease;
-    }
-
-    .question {
-      margin-bottom: 1.5rem;
-    }
-
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-    }
-
-    input, select, textarea {
       width: 100%;
-      padding: 0.7rem;
+      height: auto;
       border-radius: 10px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    .flower h2 {
+      color: #ff69b4;
+      margin: 10px 0 5px;
     }
 
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(30px); }
-      100% { opacity: 1; transform: translateY(0); }
+    .flower p {
+      font-size: 14px;
+      color: #555;
+      margin: 0;
+    }
+
+    footer {
+      margin-top: 30px;
+      padding: 20px;
+      color: #777;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🌸 Floral Love Garden 🌸</h1>
-    <p>A gentle breeze carries your name through lilac dreams and lavender skies.</p>
-  </header>
+  <h1>🌸 Which Flower Are You? 🌸</h1>
 
-  <section class="flowers">
+  <div class="flowers">
     <div class="flower">
-      <img src="https://i.imgur.com/bUOD3fc.png" alt="Lilac">
-      <div>Lilac</div>
+      <img src="lilac.jpg" alt="Lilac">
+      <h2>Lilac</h2>
+      <p>Are you the calm and quiet type who holds deep thoughts?</p>
     </div>
     <div class="flower">
-      <img src="https://i.imgur.com/Kn0EQAZ.png" alt="Lavender">
-      <div>Lavender</div>
+      <img src="lavender.jpg" alt="Lavender">
+      <h2>Lavender</h2>
+      <p>Do you always bring peace to others even when you feel tired?</p>
     </div>
     <div class="flower">
-      <img src="https://i.imgur.com/Wt7Vl2p.png" alt="Rose">
-      <div>Rose</div>
+      <img src="rose.jpg" alt="Rose">
+      <h2>Rose</h2>
+      <p>Are you soft on the inside but guard yourself with thorns?</p>
     </div>
     <div class="flower">
-      <img src="https://i.imgur.com/jzpIfs0.png" alt="Tulip">
-      <div>Tulip</div>
+      <img src="tulip.jpg" alt="Tulip">
+      <h2>Tulip</h2>
+      <p>Do you shine brightly and warmly even on someone’s cloudy day?</p>
     </div>
-  </section>
+  </div>
 
-  <section class="questions">
-    <form>
-      <div class="question">
-        <label for="favFood">💖 What is your favorite food?</label>
-        <input type="text" id="favFood" name="favFood" placeholder="Type your favorite dish..." />
-      </div>
-
-      <div class="question">
-        <label for="dreamDate">🌹 What does your dream date look like?</label>
-        <textarea id="dreamDate" name="dreamDate" rows="3" placeholder="Describe your dream romantic day..."></textarea>
-      </div>
-
-      <div class="question">
-        <label for="flowerMatch">🌸 Which flower matches your personality?</label>
-        <select id="flowerMatch" name="flowerMatch">
-          <option value="lilac">Lilac - Soft & Romantic</option>
-          <option value="lavender">Lavender - Calm & Serene</option>
-          <option value="rose">Rose - Bold & Passionate</option>
-          <option value="tulip">Tulip - Bright & Cheerful</option>
-        </select>
-      </div>
-
-      <div class="question">
-        <label for="loveSong">🎵 What's a love song that reminds you of someone special?</label>
-        <input type="text" id="loveSong" name="loveSong" placeholder="Enter song name..." />
-      </div>
-
-      <div class="question">
-        <label for="message">💌 Leave a sweet message to someone you care about:</label>
-        <textarea id="message" name="message" rows="3" placeholder="Write your lovely message here..."></textarea>
-      </div>
-    </form>
-  </section>
+  <footer>
+    🌼 Made with care by Andre 🌼
+  </footer>
 </body>
 </html>
