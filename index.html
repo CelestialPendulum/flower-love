@@ -143,17 +143,20 @@
     <button onclick="location.reload()">Re-pick Flower 🌼</button>
   </div>
 
-  <audio id="clickSound" src="https://www.fesliyanstudios.com/play-mp3/4386"></audio>
-  <audio id="typingSound" src="https://www.fesliyanstudios.com/play-mp3/6693"></audio>
+  <!-- Replace sounds with meows 🐱 -->
+  <audio id="meowSound" src="https://www.soundjay.com/cat/cat-meow-2.mp3" preload="auto"></audio>
 
   <script>
     function playEffect(flowerName) {
-      document.getElementById('clickSound').play();
+      const sound = document.getElementById('meowSound');
+      sound.pause();
+      sound.currentTime = 0;
+      sound.play();
       alert("You clicked " + flowerName + "! It's as beautiful as you. 🌸");
     }
 
     function playTyping() {
-      const sound = document.getElementById('typingSound');
+      const sound = document.getElementById('meowSound');
       sound.pause();
       sound.currentTime = 0;
       sound.play();
