@@ -2,30 +2,198 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Romantic Flower Picker 🌸</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Romantic Flower Quiz</title>
+  <style>
+    body {
+      background-color: #f8e9ff;
+      font-family: 'Comic Sans MS', cursive;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #c76b82;
+    }
+    .flower-options button {
+      margin: 10px;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: none;
+    }
+    .question-container, .receipt-container {
+      margin-top: 20px;
+      background-color: #fff0dc;
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+    .question-field input {
+      margin: 10px 0;
+      padding: 8px;
+      width: 80%;
+    }
+    .flower-song-button {
+      margin-top: 20px;
+      background-color: #f89cab;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <h1>Pick a Flower 💐</h1>
-
-  <div class="flower-container">
-    <img src="images/lavander.jpg" alt="Lavender" class="flower" data-sound="lavender.mp3" />
-    <img src="images/lilac.jpg" alt="Lilac" class="flower" data-sound="lilac.mp3" />
-    <img src="images/roses.jpg" alt="Rose" class="flower" data-sound="roses.mp3" />
-    <img src="images/tulip.png" alt="Tulip" class="flower" data-sound="tulip.mp3" />
+  <h1>Your Romantic Receipt</h1>
+  <div class="flower-options">
+    <button onclick="startQuiz('rose')">🌹 Rose</button>
+    <button onclick="startQuiz('sunflower')">🌻 Sunflower</button>
+    <button onclick="startQuiz('tulip')">🌷 Tulip</button>
+    <button onclick="startQuiz('cherry')">🌸 Cherry Blossom</button>
   </div>
 
-  <div class="input-container">
-    <label for="romantic-question">What kind of love do you dream about?</label>
-    <input
-      type="text"
-      id="romantic-question"
-      placeholder="Whisper your love here..."
-      oninput="playTypingSound()" />
-    <button onclick="searchSpotify()">Play in Spotify 🎶</button>
-  </div>
+  <div class="question-container" id="questionContainer" style="display:none"></div>
+  <div class="receipt-container" id="receiptContainer" style="display:none"></div>
 
-  <script src="script.js"></script>
+  <!-- Background Piano Music -->
+  <audio id="backgroundMusic" loop>
+    <source src="/sounds/nothing.mp3" type="audio/mp3">
+  </audio>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const bgMusic = document.getElementById('backgroundMusic');
+      bgMusic.volume = 0.1;
+      bgMusic.play().catch(() => {
+        // In case autoplay is blocked, play after user interaction
+        document.body.addEventListener('click', () => bgMusic.play(), { once: true });
+      });
+    });
+  </script>
+  
+
+  <!-- Flower Songs -->
+  <audio id="flowerSong"></audio>
+
+  <script>
+    const flowerQuestions = {
+      rose: [
+        "What reminds you of love?",
+        "What color makes you feel safe?",
+        "What's your ideal romantic date?",
+        "What makes your heart skip a beat?",
+        "Favorite love movie?",
+        "Who is your comfort person?",
+        "What flower do you think represents loyalty?"
+      ],
+      sunflower: [
+        "Who makes you smile the most?",
+        "What brings sunshine into your life?",
+        "Your favorite memory with a friend?",
+        "A moment you felt truly seen?",
+        "Your favorite happy song?",
+        "What's your comfort food?",
+        "A place where you feel most alive?"
+      ],
+      tulip: [
+        "What color calms your soul?",
+        "A memory that makes you feel elegant?",
+        "What's something mysterious about you?",
+        "What defines sweetness to you?",
+        "A childhood moment you loved?",
+        "What do you dream about often?",
+        "Your favorite aesthetic?"
+      ],
+      cherry: [
+        "What do you associate with spring?",
+        "Your most innocent memory?",
+        "A moment of unexpected joy?",
+        "What makes you feel soft inside?",
+        "Favorite pink item you own?",
+        "A kind word someone told you?",
+        "A memory that feels like a daydream?"
+      ]
+    };
+
+    const flowerColors = {
+      rose: '#ffcdd2',
+      sunflower: '#fff9c4',
+      tulip: '#e1bee7',
+      cherry: '#f8bbd0'
+    };
+
+    const flowerMeanings = {
+      rose: 'is passionate, deep, and full of love.',
+      sunflower: 'is joyful, bright, and warm-hearted.',
+      tulip: 'is elegant, sweet, and mysterious.',
+      cherry: 'is gentle, delicate, and dreamy.'
+    };
+
+    const flowerSongs = {
+      rose: 'sounds/rose.mp3',
+      sunflower: 'sounds/sunflower.mp3',
+      tulip: 'sounds/tulip.mp3',
+      cherry: 'sounds/cherry.mp3'
+    };
+
+    function startQuiz(flower) {
+      const container = document.getElementById('questionContainer');
+      container.innerHTML = '';
+      container.style.display = 'block';
+      document.getElementById('receiptContainer').style.display = 'none';
+      document.body.style.backgroundColor = flowerColors[flower];
+      const questions = flowerQuestions[flower];
+
+      questions.forEach((q, i) => {
+        container.innerHTML += `
+          <div class="question-field">
+            <label>${q}</label><br>
+            <input type="text" id="q${i}" />
+          </div>
+        `;
+      });
+
+      container.innerHTML += `<button onclick="showReceipt('${flower}')">Submit</button>`;
+    }
+
+    function showReceipt(flower) {
+      const container = document.getElementById('receiptContainer');
+      container.innerHTML = `
+        <div><strong>🌿 Flower Chosen:</strong> ${capitalize(flower)}</div>
+      `;
+
+      for (let i = 0; i < 7; i++) {
+        const answer = document.getElementById(`q${i}`).value;
+        container.innerHTML += `<div><strong>💬 Answer ${i + 1}:</strong> ${answer}</div>`;
+      }
+
+      container.innerHTML += `
+        <div><strong>🌸 You're the type of girl who...</strong> ${flowerMeanings[flower]}</div>
+        <button class="flower-song-button" onclick="playFlowerSong('${flower}')">Your Flower Song</button>
+      `;
+      container.style.display = 'block';
+      document.getElementById('questionContainer').style.display = 'none';
+    }
+
+    function playFlowerSong(flower) {
+  const song = document.getElementById('flowerSong');
+  const background = document.getElementById('backgroundMusic');
+
+  // Stop background piano music
+  background.pause();
+  background.currentTime = 0;
+
+  // Play flower-specific song
+  song.src = flowerSongs[flower];
+  song.play();
+    }
+
+
+    function capitalize(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+  </script>
 </body>
 </html>
