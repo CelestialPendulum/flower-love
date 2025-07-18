@@ -3,36 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Flower of Love 🌸</title>
+  <title>Romantic Flower Picker 🌸</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1 class="title">🌼 Pick Your Flower of Love 🌼</h1>
-  <div class="card-container">
-    <div class="card" data-flower="Lilac">
-      <img src="images/lilac.jpg" alt="Lilac" />
-      <p>Lilac</p>
-    </div>
-    <div class="card" data-flower="Lavender">
-      <img src="images/lavander.jpg" alt="Lavender" />
-      <p>Lavender</p>
-    </div>
-    <div class="card" data-flower="Rose">
-      <img src="images/roses.jpg" alt="Rose" />
-      <p>Rose</p>
-    </div>
-    <div class="card" data-flower="Tulip">
-      <img src="images/tulip.png" alt="Tulip" />
-      <p>Tulip</p>
-    </div>
+  <h1>Pick a Flower 💐</h1>
+
+  <div class="flower-container">
+    <img src="images/lavander.jpg" alt="Lavender" class="flower" data-sound="lavender.mp3" />
+    <img src="images/lilac.jpg" alt="Lilac" class="flower" data-sound="lilac.mp3" />
+    <img src="images/roses.jpg" alt="Rose" class="flower" data-sound="roses.mp3" />
+    <img src="images/tulip.png" alt="Tulip" class="flower" data-sound="tulip.mp3" />
   </div>
 
-  <div class="question">
-    <label for="song-input">What is your favorite song?</label>
-    <input type="text" id="song-input" placeholder="Type here and press Enter 🎵" />
+  <div class="input-container">
+    <label for="romantic-question">What kind of love do you dream about?</label>
+    <input
+      type="text"
+      id="romantic-question"
+      placeholder="Whisper your love here..."
+      oninput="playTypingSound()" />
+    <button onclick="searchSpotify()">Play in Spotify 🎶</button>
   </div>
-
-  <audio id="cat-sound" src="sounds/cat.mp3" preload="auto"></audio>
 
   <script src="script.js"></script>
 </body>
